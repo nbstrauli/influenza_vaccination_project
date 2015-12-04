@@ -1,0 +1,1 @@
+We removed the fasta file that was the entire human genome with the Ab parts masked out. This file was in 'reference_databases/human_genome_Ab_parts_masked_bowtie_indices'. It makes the tophat mapping step faster, but the file was too large to upload to GitHub.
