@@ -6,6 +6,7 @@ def get_genename_dic(fpca_test_output_dipath):
     """This script gets the genes names for all the genes found in each patient. It does this by making a dictionary, where each index is a gene name and then it makes the definition for that index a list of '0''s of length equal to the number of patients. '0' denotes "not significant" in this case, so this script is essentially priming the genenames_dic, which will then be updated with which genes are significant later."""
     genename_dic = {}
     patients = [i for i in sorted(os.listdir(fpca_test_output_dipath)) if i[0] != '.']
+    print patients
     for i in os.listdir(fpca_test_output_dipath):
         if i[0] == '.' or i == 'README':
             continue
@@ -55,7 +56,7 @@ def sort_and_write_output(genename_dic, SGS_output_filepath, patients):
     return
 
 def run(gene_usage_dirpath, output_dirpath, FDR=0.05):
-    """'gene_usage_dirpath' = The path to the directory that contains the gene expression trajectories for each gene. More specifically, each file in this directory should be a gene usage matrix, where each row is a gene, each column is a time-point, and each element is the expression level for that gene at that time-point. The gene name is the first entry in each row, and each column has a header giving the unique, numeric, time-point ID. The name of each of these files should be a unique identifier for each individual patient in the study. Essentially, each of these files must be in the same format as the 'gene_usage' output from the 'pipeline.bash' script."""
+    """'gene_usage_dirpath' = The path to the directory that contains the gene expression trajectories for each individual. The files in this directory should be the gene usage for all the individuals, for a given gene. That is all the gene usage files should be for the same gene segment, but each one for a different individual in the study. More specifically, each file in this directory should be a gene usage matrix, where each row is a gene, each column is a time-point, and each element is the expression level for that gene at that time-point. The gene name is the first entry in each row, and each column has a header giving the unique, numeric, time-point ID. The name of each of these files should be a unique identifier for each individual patient in the study. Essentially, each of these files must be in the same format as the 'gene_usage' output from the 'pipeline.bash' script."""
     if gene_usage_dirpath[-1] != '/':
         gene_usage_dirpath += '/'
     if output_dirpath[-1] != '/':
